@@ -164,7 +164,15 @@ export default function Home() {
                     alt="K&W Mobile Tire Service"
                     width={300}
                     height={180}
-                    className="w-auto h-auto max-w-[240px] sm:max-w-[280px] dark:brightness-0 dark:invert"
+                    className="w-auto h-auto max-w-[240px] sm:max-w-[280px] dark:hidden"
+                    priority
+                  />
+                  <Image
+                    src="/kw-logo-white.png"
+                    alt="K&W Mobile Tire Service"
+                    width={300}
+                    height={180}
+                    className="w-auto h-auto max-w-[240px] sm:max-w-[280px] hidden dark:block"
                     priority
                   />
                   <div className="mt-3 flex flex-col gap-1">
