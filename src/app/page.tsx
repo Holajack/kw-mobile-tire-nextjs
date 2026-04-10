@@ -15,7 +15,6 @@ import {
   ChevronDown,
   ChevronRight,
   ArrowRight,
-  Wrench,
   CheckCircle,
   MessageSquare,
 } from "lucide-react";
@@ -135,18 +134,23 @@ export default function Home() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               >
-                {/* Logo mark */}
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="w-14 h-14 rounded-xl bg-slate-900 dark:bg-white flex items-center justify-center">
-                    <span className="font-heading text-xl font-bold text-white dark:text-slate-900">
-                      K<span className="text-primary">&#38;</span>W
-                    </span>
-                  </div>
-                  <div>
-                    <p className="font-heading text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+                {/* Logo with supporting text */}
+                <div className="mb-8">
+                  <Image
+                    src="/kw-logo-clean.png"
+                    alt="K&W Mobile Tire Service"
+                    width={300}
+                    height={180}
+                    className="w-auto h-auto max-w-[240px] sm:max-w-[280px] dark:brightness-0 dark:invert"
+                    priority
+                  />
+                  <div className="mt-3 flex flex-col gap-1">
+                    <p className="font-heading text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight">
                       Mobile Tire Service
                     </p>
-                    <p className="text-xs text-accent font-semibold">Veteran-Owned &bull; Central Florida</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">
+                      Veteran-Owned <span className="text-primary font-semibold">&bull;</span> Central Florida <span className="text-primary font-semibold">&bull;</span> On-Site Repairs
+                    </p>
                   </div>
                 </div>
               </motion.div>
@@ -209,45 +213,43 @@ export default function Home() {
               </motion.div>
             </div>
 
-            {/* Right — service highlight cards */}
+            {/* Right — hero video/animation */}
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="relative"
+              className="relative hidden lg:block"
             >
-              <div className="bg-slate-50 dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800">
-                <div className="flex items-center gap-3 mb-6">
-                  <Wrench className="w-5 h-5 text-primary" />
-                  <h2 className="font-heading font-bold text-slate-900 dark:text-white">What we service</h2>
-                </div>
-                <div className="grid grid-cols-2 gap-3">
-                  {services.map((service, i) => {
-                    const Icon = iconMap[service.icon] || Truck;
-                    return (
-                      <Link
-                        key={service.slug}
-                        href={`/services/${service.slug}`}
-                        className="group relative bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-100 dark:border-slate-700 hover:border-primary/40 transition-all hover:shadow-md"
-                      >
-                        <Icon className="w-8 h-8 text-primary mb-2 group-hover:scale-110 transition-transform" />
-                        <p className="font-semibold text-sm text-slate-900 dark:text-white">{service.shortTitle}</p>
-                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-1">{service.description.split(".")[0]}</p>
-                      </Link>
-                    );
-                  })}
-                </div>
+              <div className="relative aspect-square max-w-lg mx-auto rounded-3xl overflow-hidden bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                {/* Video — replace src with your generated tire animation */}
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  poster="/kw-logo-tagline.png"
+                  className="w-full h-full object-cover"
+                >
+                  {/* Add your video file here: */}
+                  {/* <source src="/hero-tire-animation.mp4" type="video/mp4" /> */}
+                </video>
 
-                {/* Quick stat strip */}
-                <div className="mt-6 grid grid-cols-3 gap-3">
+                {/* Overlay gradient for polish */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+
+                {/* Stat badges floating over the video */}
+                <div className="absolute bottom-4 left-4 right-4 flex gap-2">
                   {[
                     { value: "3", label: "Counties" },
                     { value: "18+", label: "Cities" },
-                    { value: "<90 min", label: "Response" },
+                    { value: "<90min", label: "Response" },
                   ].map((stat) => (
-                    <div key={stat.label} className="text-center py-3 bg-primary/5 dark:bg-primary/10 rounded-lg">
-                      <p className="font-heading text-lg font-bold text-primary">{stat.value}</p>
-                      <p className="text-xs text-slate-500 dark:text-slate-400">{stat.label}</p>
+                    <div
+                      key={stat.label}
+                      className="flex-1 text-center py-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-lg border border-white/20"
+                    >
+                      <p className="font-heading text-sm font-bold text-primary">{stat.value}</p>
+                      <p className="text-[10px] text-slate-600 dark:text-slate-400">{stat.label}</p>
                     </div>
                   ))}
                 </div>
