@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     template: "%s | K&W Mobile Tire Service",
   },
   description:
-    "Veteran-owned mobile tire service in Central Florida. On-site tire repair and replacement for commercial trucks, trailers, RVs, and heavy equipment. Serving Volusia, Flagler, and Brevard Counties.",
+    "Veteran-owned mobile tire service in Central Florida. On-site repair and replacement for trucks, trailers, RVs, and heavy equipment. Volusia, Flagler, Brevard.",
   keywords: [
     "mobile tire service",
     "mobile tire repair",

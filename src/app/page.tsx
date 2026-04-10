@@ -109,6 +109,24 @@ const faqSchema = {
   })),
 };
 
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "K&W Mobile Tire Service",
+  url: "https://kwmobiletire.com",
+  description: "Veteran-owned mobile tire service in Central Florida. On-site repair and replacement for trucks, trailers, RVs, and heavy equipment.",
+  publisher: {
+    "@type": "Organization",
+    name: "K&W Mobile Tire Service",
+    url: "https://kwmobiletire.com",
+  },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: "https://kwmobiletire.com/?q={search_term_string}",
+    "query-input": "required name=search_term_string",
+  },
+};
+
 export default function Home() {
   return (
     <>
@@ -122,6 +140,11 @@ export default function Home() {
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger -- static schema data from hardcoded constants, not user input
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger -- static schema data from hardcoded constants, not user input
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
       />
       {/* Hero — split layout with logo and form */}
       <section className="relative overflow-hidden bg-white dark:bg-slate-950">
@@ -213,46 +236,45 @@ export default function Home() {
               </motion.div>
             </div>
 
-            {/* Right — hero video/animation */}
+            {/* Right — service highlights + stats */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="relative hidden lg:block"
+              className="relative"
             >
-              <div className="relative aspect-square max-w-lg mx-auto rounded-3xl overflow-hidden bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-                {/* Video — replace src with your generated tire animation */}
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  poster="/kw-logo-tagline.png"
-                  className="w-full h-full object-cover"
-                >
-                  {/* Add your video file here: */}
-                  {/* <source src="/hero-tire-animation.mp4" type="video/mp4" /> */}
-                </video>
-
-                {/* Overlay gradient for polish */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
-
-                {/* Stat badges floating over the video */}
-                <div className="absolute bottom-4 left-4 right-4 flex gap-2">
-                  {[
-                    { value: "3", label: "Counties" },
-                    { value: "18+", label: "Cities" },
-                    { value: "<90min", label: "Response" },
-                  ].map((stat) => (
-                    <div
-                      key={stat.label}
-                      className="flex-1 text-center py-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm rounded-lg border border-white/20"
+              {/* Service grid */}
+              <div className="grid grid-cols-2 gap-3">
+                {services.map((service) => {
+                  const Icon = iconMap[service.icon] || Truck;
+                  return (
+                    <Link
+                      key={service.slug}
+                      href={`/services/${service.slug}`}
+                      className="group bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 hover:border-primary/40 hover:shadow-lg transition-all duration-300"
                     >
-                      <p className="font-heading text-sm font-bold text-primary">{stat.value}</p>
-                      <p className="text-[10px] text-slate-600 dark:text-slate-400">{stat.label}</p>
-                    </div>
-                  ))}
-                </div>
+                      <div className="w-10 h-10 rounded-xl bg-primary/10 dark:bg-primary/20 flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                        <Icon className="w-5 h-5 text-primary group-hover:text-white transition-colors duration-300" />
+                      </div>
+                      <p className="font-heading font-bold text-sm text-slate-900 dark:text-white">{service.shortTitle}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">{service.description.split(".")[0]}.</p>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              {/* Stats strip */}
+              <div className="mt-4 grid grid-cols-3 gap-3">
+                {[
+                  { value: "3", label: "Counties Served" },
+                  { value: "18+", label: "Cities Covered" },
+                  { value: "<90m", label: "Avg. Response" },
+                ].map((stat) => (
+                  <div key={stat.label} className="text-center py-4 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <p className="font-heading text-xl font-bold text-primary">{stat.value}</p>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">{stat.label}</p>
+                  </div>
+                ))}
               </div>
             </motion.div>
           </div>

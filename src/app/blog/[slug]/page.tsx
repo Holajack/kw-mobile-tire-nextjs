@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Clock, ArrowLeft, Phone, Tag, Shield } from "lucide-react";
+import { Clock, ArrowLeft, Phone, Tag } from "lucide-react";
 import { blogPosts, getPostBySlug } from "@/data/blog-posts";
 
 interface Props {
@@ -142,14 +142,21 @@ export default async function BlogPostPage({ params }: Props) {
     datePublished: post.date,
     dateModified: post.date,
     author: {
-      "@type": "Organization",
-      name: "K&W Mobile Tire Service",
-      url: "https://kwmobiletire.com",
+      "@type": "Person",
+      name: "Dustin Boyd",
+      jobTitle: "Owner & Operator",
+      url: "https://kwmobiletire.com/about/",
+      worksFor: {
+        "@type": "Organization",
+        name: "K&W Mobile Tire Service",
+        url: "https://kwmobiletire.com",
+      },
     },
     publisher: {
       "@type": "Organization",
       name: "K&W Mobile Tire Service",
-      logo: { "@type": "ImageObject", url: "https://kwmobiletire.com/logo.svg" },
+      url: "https://kwmobiletire.com",
+      logo: { "@type": "ImageObject", url: "https://kwmobiletire.com/kw-logo-clean.png" },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
@@ -188,7 +195,14 @@ export default async function BlogPostPage({ params }: Props) {
             All Articles
           </Link>
 
-          <div className="flex items-center gap-3 text-sm text-slate-500 mb-4">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-slate-500 mb-4">
+            <span>
+              By{" "}
+              <Link href="/about" className="text-slate-700 dark:text-slate-300 font-medium hover:text-primary transition-colors">
+                Dustin Boyd
+              </Link>
+            </span>
+            <span className="text-slate-300 dark:text-slate-600">|</span>
             <time dateTime={post.date}>
               {new Date(post.date).toLocaleDateString("en-US", {
                 month: "long",
@@ -254,13 +268,15 @@ export default async function BlogPostPage({ params }: Props) {
           <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800">
             <div className="flex items-start gap-4 bg-slate-50 dark:bg-slate-900 rounded-xl p-5">
               <div className="w-14 h-14 rounded-full bg-primary/10 dark:bg-primary/20 flex items-center justify-center shrink-0">
-                <Shield className="w-6 h-6 text-primary" />
+                <span className="font-heading text-lg font-bold text-primary">DB</span>
               </div>
               <div>
-                <p className="font-semibold text-slate-900 dark:text-white">K&W Mobile Tire Service</p>
-                <p className="text-xs text-accent font-medium mb-1">Veteran-Owned & Operated</p>
+                <Link href="/about" className="font-semibold text-slate-900 dark:text-white hover:text-primary transition-colors">
+                  Dustin Boyd
+                </Link>
+                <p className="text-xs text-accent font-medium mb-1">Owner & Operator — U.S. Military Veteran</p>
                 <p className="text-sm text-slate-600 dark:text-slate-400">
-                  Written by the K&W team. We share what we see in the field every day — real problems, real solutions, and practical advice for tire owners in Central Florida.
+                  Dustin runs K&W Mobile Tire Service across Volusia, Flagler, and Brevard Counties. Every article comes from what he sees in the field — real tire problems, honest advice, and the experience of hundreds of on-site service calls.
                 </p>
               </div>
             </div>

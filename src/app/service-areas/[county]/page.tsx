@@ -20,8 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!county) return {};
 
   return {
-    title: `Mobile Tire Service in ${county.name}`,
-    description: county.description,
+    title: `Mobile Tire Service in ${county.name}, FL`,
+    description: `${county.description} Veteran-owned on-site tire repair. Call (386) 566-7339.`,
     alternates: { canonical: `/service-areas/${countySlug}/` },
   };
 }

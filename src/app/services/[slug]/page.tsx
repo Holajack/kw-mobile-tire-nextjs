@@ -26,8 +26,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!service) return {};
 
   return {
-    title: service.title,
-    description: service.description,
+    title: `${service.title} — Central Florida`,
+    description: `${service.description} Veteran-owned mobile service across Volusia, Flagler, and Brevard Counties. Call (386) 566-7339.`,
     alternates: { canonical: `/services/${slug}/` },
   };
 }

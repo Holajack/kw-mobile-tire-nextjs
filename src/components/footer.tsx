@@ -2,23 +2,25 @@ import Link from "next/link";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 
 const serviceLinks = [
-  { href: "/services/commercial-trucks", label: "Commercial Trucks" },
-  { href: "/services/trailers", label: "Trailers" },
-  { href: "/services/rvs-motorhomes", label: "RVs & Motorhomes" },
-  { href: "/services/heavy-equipment", label: "Heavy Equipment" },
+  { href: "/services/commercial-trucks/", label: "Commercial Trucks" },
+  { href: "/services/trailers/", label: "Trailers" },
+  { href: "/services/rvs-motorhomes/", label: "RVs & Motorhomes" },
+  { href: "/services/heavy-equipment/", label: "Heavy Equipment" },
 ];
 
 const areaLinks = [
-  { href: "/service-areas/volusia-county", label: "Volusia County" },
-  { href: "/service-areas/flagler-county", label: "Flagler County" },
-  { href: "/service-areas/brevard-county", label: "Brevard County" },
+  { href: "/service-areas/volusia-county/", label: "Volusia County" },
+  { href: "/service-areas/flagler-county/", label: "Flagler County" },
+  { href: "/service-areas/brevard-county/", label: "Brevard County" },
 ];
 
 const resourceLinks = [
-  { href: "/blog", label: "Articles" },
-  { href: "/about", label: "About Us" },
-  { href: "/contact", label: "Contact" },
-  { href: "/service-areas", label: "Service Areas" },
+  { href: "/blog/", label: "Articles" },
+  { href: "/about/", label: "About Us" },
+  { href: "/contact/", label: "Contact" },
+  { href: "/service-areas/", label: "Service Areas" },
+  { href: "/privacy/", label: "Privacy Policy" },
+  { href: "/terms/", label: "Terms of Service" },
 ];
 
 export function Footer() {
