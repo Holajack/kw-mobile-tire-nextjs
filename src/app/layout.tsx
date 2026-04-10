@@ -18,7 +18,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kwmobiletire.com"),
+  metadataBase: new URL("https://kwtires.com"),
   title: {
     default: "K&W Mobile Tire Service | Volusia, Flagler & Brevard Counties",
     template: "%s | K&W Mobile Tire Service",

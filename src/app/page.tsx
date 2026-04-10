@@ -62,13 +62,13 @@ const faqs = [
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "@id": "https://kwmobiletire.com/#business",
+  "@id": "https://kwtires.com/#business",
   name: "K&W Mobile Tire Service",
   description: "Veteran-owned mobile tire service providing on-site tire repair and replacement for commercial trucks, trailers, RVs, and heavy equipment across Volusia, Flagler, and Brevard Counties in Central Florida.",
-  url: "https://kwmobiletire.com",
+  url: "https://kwtires.com",
   telephone: "+1-386-566-7339",
   email: "kwmobiletireservice@gmail.com",
-  image: "https://kwmobiletire.com/og-image.png",
+  image: "https://kwtires.com/og-image.png",
   priceRange: "$$",
   areaServed: [
     { "@type": "County", name: "Volusia County, FL" },
@@ -113,16 +113,16 @@ const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "K&W Mobile Tire Service",
-  url: "https://kwmobiletire.com",
+  url: "https://kwtires.com",
   description: "Veteran-owned mobile tire service in Central Florida. On-site repair and replacement for trucks, trailers, RVs, and heavy equipment.",
   publisher: {
     "@type": "Organization",
     name: "K&W Mobile Tire Service",
-    url: "https://kwmobiletire.com",
+    url: "https://kwtires.com",
   },
   potentialAction: {
     "@type": "SearchAction",
-    target: "https://kwmobiletire.com/?q={search_term_string}",
+    target: "https://kwtires.com/?q={search_term_string}",
     "query-input": "required name=search_term_string",
   },
 };

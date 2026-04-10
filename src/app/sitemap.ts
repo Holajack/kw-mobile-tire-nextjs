@@ -3,7 +3,7 @@ import { counties } from "@/data/service-areas";
 import { blogPosts } from "@/data/blog-posts";
 import { services } from "@/data/services";
 
-const BASE_URL = "https://kwmobiletire.com";
+const BASE_URL = "https://kwtires.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date().toISOString();

@@ -145,22 +145,22 @@ export default async function BlogPostPage({ params }: Props) {
       "@type": "Person",
       name: "Dustin Boyd",
       jobTitle: "Owner & Operator",
-      url: "https://kwmobiletire.com/about/",
+      url: "https://kwtires.com/about/",
       worksFor: {
         "@type": "Organization",
         name: "K&W Mobile Tire Service",
-        url: "https://kwmobiletire.com",
+        url: "https://kwtires.com",
       },
     },
     publisher: {
       "@type": "Organization",
       name: "K&W Mobile Tire Service",
-      url: "https://kwmobiletire.com",
-      logo: { "@type": "ImageObject", url: "https://kwmobiletire.com/kw-logo-clean.png" },
+      url: "https://kwtires.com",
+      logo: { "@type": "ImageObject", url: "https://kwtires.com/kw-logo-clean.png" },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://kwmobiletire.com/blog/${slug}/`,
+      "@id": `https://kwtires.com/blog/${slug}/`,
     },
   };
 
@@ -168,9 +168,9 @@ export default async function BlogPostPage({ params }: Props) {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://kwmobiletire.com/" },
-      { "@type": "ListItem", position: 2, name: "Articles", item: "https://kwmobiletire.com/blog/" },
-      { "@type": "ListItem", position: 3, name: post.title, item: `https://kwmobiletire.com/blog/${slug}/` },
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://kwtires.com/" },
+      { "@type": "ListItem", position: 2, name: "Articles", item: "https://kwtires.com/blog/" },
+      { "@type": "ListItem", position: 3, name: post.title, item: `https://kwtires.com/blog/${slug}/` },
     ],
   };
 

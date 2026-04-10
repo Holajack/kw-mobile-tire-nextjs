@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kwmobiletire.com/sitemap.xml
+Sitemap: https://kwtires.com/sitemap.xml
