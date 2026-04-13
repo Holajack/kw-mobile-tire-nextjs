@@ -146,71 +146,49 @@ export default function Home() {
         // eslint-disable-next-line react/no-danger -- static schema data from hardcoded constants, not user input
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
       />
-      {/* Hero — split layout with logo and form */}
+      {/* Hero — split layout with logo + emergency services */}
       <section className="relative overflow-hidden bg-white dark:bg-slate-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 py-12 lg:py-20 items-center">
-            {/* Left — content */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 py-12 lg:py-20 items-center">
+            {/* Left — logo + CTA */}
             <div>
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               >
-                {/* Logo with supporting text */}
-                <div className="mb-8">
-                  <Image
-                    src="/kw-logo-clean.png"
-                    alt="K&W Mobile Tire Service"
-                    width={300}
-                    height={180}
-                    className="w-auto h-auto max-w-[240px] sm:max-w-[280px] dark:hidden"
-                    priority
-                  />
-                  <Image
-                    src="/kw-logo-white.png"
-                    alt="K&W Mobile Tire Service"
-                    width={300}
-                    height={180}
-                    className="w-auto h-auto max-w-[240px] sm:max-w-[280px] hidden dark:block"
-                    priority
-                  />
-                  <div className="mt-3 flex flex-col gap-1">
-                    <p className="font-heading text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight">
-                      Mobile Tire Service
-                    </p>
-                    <p className="text-sm text-slate-500 dark:text-slate-400">
-                      Veteran-Owned <span className="text-primary font-semibold">&bull;</span> Central Florida <span className="text-primary font-semibold">&bull;</span> On-Site Repairs
-                    </p>
-                  </div>
-                </div>
+                <Image
+                  src="/kw-logo.png"
+                  alt="K&W Mobile Tire Service — For Tires Done Right"
+                  width={500}
+                  height={290}
+                  className="w-auto h-auto max-w-[340px] sm:max-w-[420px] lg:max-w-[460px] dark:hidden"
+                  priority
+                />
+                <Image
+                  src="/kw-logo-dark.png"
+                  alt="K&W Mobile Tire Service — For Tires Done Right"
+                  width={500}
+                  height={290}
+                  className="w-auto h-auto max-w-[340px] sm:max-w-[420px] lg:max-w-[460px] hidden dark:block"
+                  priority
+                />
               </motion.div>
-
-              <motion.h1
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="font-heading text-4xl sm:text-5xl lg:text-[3.5rem] font-bold text-slate-900 dark:text-white leading-[1.1]"
-              >
-                Tire trouble?
-                <br />
-                <span className="text-primary">We drive to you.</span>
-              </motion.h1>
 
               <motion.p
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-5 text-lg text-slate-600 dark:text-slate-400 max-w-lg leading-relaxed"
+                transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+                className="mt-5 text-sm text-slate-500 dark:text-slate-400"
               >
-                Commercial trucks, trailers, RVs, heavy equipment — repaired or replaced on-site across Volusia, Flagler, and Brevard Counties. No towing. No shop wait.
+                Veteran-Owned <span className="text-primary font-semibold">&bull;</span> Central Florida <span className="text-primary font-semibold">&bull;</span> On-Site Repairs
               </motion.p>
 
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-8 flex flex-col sm:flex-row gap-3"
+                transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                className="mt-6 flex flex-col sm:flex-row gap-3"
               >
                 <a
                   href="tel:3865667339"
@@ -232,8 +210,8 @@ export default function Home() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="mt-8 flex flex-wrap gap-x-6 gap-y-2"
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="mt-6 flex flex-wrap gap-x-6 gap-y-2"
               >
                 {["Licensed & Insured", "U.S. Veteran Owned", "Same-Day Service"].map((item) => (
                   <span key={item} className="flex items-center gap-1.5 text-sm text-slate-500 dark:text-slate-400">
@@ -244,46 +222,51 @@ export default function Home() {
               </motion.div>
             </div>
 
-            {/* Right — service highlights + stats */}
+            {/* Right — Emergency Services */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="relative"
+              className="bg-slate-900 dark:bg-slate-800/50 rounded-2xl p-8 sm:p-10 border border-slate-800 dark:border-slate-700"
             >
-              {/* Service grid */}
-              <div className="grid grid-cols-2 gap-3">
-                {services.map((service) => {
-                  const Icon = iconMap[service.icon] || Truck;
-                  return (
-                    <Link
-                      key={service.slug}
-                      href={`/services/${service.slug}`}
-                      className="group bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 hover:border-primary/40 hover:shadow-lg transition-all duration-300"
-                    >
-                      <div className="w-10 h-10 rounded-xl bg-primary/10 dark:bg-primary/20 flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                        <Icon className="w-5 h-5 text-primary group-hover:text-white transition-colors duration-300" />
-                      </div>
-                      <p className="font-heading font-bold text-sm text-slate-900 dark:text-white">{service.shortTitle}</p>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">{service.description.split(".")[0]}.</p>
-                    </Link>
-                  );
-                })}
-              </div>
+              <h2 className="font-heading text-3xl sm:text-4xl font-bold text-white leading-tight">
+                Emergency
+                <br />
+                <span className="text-primary-light">Services</span>
+              </h2>
+              <p className="mt-3 text-slate-400 text-sm">
+                On-site tire repair &amp; replacement across Volusia, Flagler, and Brevard Counties.
+              </p>
 
-              {/* Stats strip */}
-              <div className="mt-4 grid grid-cols-3 gap-3">
+              <div className="mt-6 space-y-3">
                 {[
-                  { value: "3", label: "Counties Served" },
-                  { value: "18+", label: "Cities Covered" },
-                  { value: "<90m", label: "Avg. Response" },
-                ].map((stat) => (
-                  <div key={stat.label} className="text-center py-4 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
-                    <p className="font-heading text-xl font-bold text-primary">{stat.value}</p>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">{stat.label}</p>
+                  { icon: Truck, label: "Commercial Vehicles", desc: "Semi-trucks, box trucks, fleet vehicles" },
+                  { icon: Caravan, label: "RVs & Travel Trailers", desc: "Motorhomes, fifth wheels, campers" },
+                  { icon: Container, label: "Trailers", desc: "Utility, boat, and equipment trailers" },
+                  { icon: HardHat, label: "Heavy Equipment / Machinery", desc: "Forklifts, skid steers, backhoes, tractors" },
+                ].map((item) => (
+                  <div
+                    key={item.label}
+                    className="flex items-start gap-4 bg-white/5 rounded-xl p-4 border border-white/10"
+                  >
+                    <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
+                      <item.icon className="w-5 h-5 text-primary-light" />
+                    </div>
+                    <div>
+                      <p className="font-heading font-bold text-white text-sm">{item.label}</p>
+                      <p className="text-xs text-slate-400 mt-0.5">{item.desc}</p>
+                    </div>
                   </div>
                 ))}
               </div>
+
+              <a
+                href="tel:3865667339"
+                className="mt-6 w-full inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-light text-white py-3.5 rounded-xl font-semibold transition-all hover:shadow-lg hover:shadow-primary/30"
+              >
+                <Phone className="w-4 h-4" />
+                Call Now — (386) 566-7339
+              </a>
             </motion.div>
           </div>
         </div>
