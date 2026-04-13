@@ -2,19 +2,70 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Clock, ArrowLeft, Phone, Tag } from "lucide-react";
-import { blogPosts, getPostBySlug } from "@/data/blog-posts";
+import { blogPosts as hardcodedPosts, getPostBySlug as getHardcodedPost } from "@/data/blog-posts";
+import { getBlogPostBySlug, getPublishedBlogPosts, getAllBlogSlugs } from "@/sanity/queries";
+
+export const revalidate = 60;
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
+async function getPost(slug: string) {
+  try {
+    const sanityPost = await getBlogPostBySlug(slug);
+    if (sanityPost) {
+      return {
+        slug: sanityPost.slug,
+        title: sanityPost.title,
+        excerpt: sanityPost.excerpt,
+        date: sanityPost.publishedAt,
+        readTime: sanityPost.readTime,
+        tags: sanityPost.tags || [],
+        content: sanityPost.content,
+      };
+    }
+  } catch {
+    // Sanity fetch failed — fall back
+  }
+  return getHardcodedPost(slug) || null;
+}
+
+async function getAllPosts() {
+  try {
+    const sanityPosts = await getPublishedBlogPosts();
+    if (sanityPosts.length > 0) {
+      return sanityPosts.map((p) => ({
+        slug: p.slug,
+        title: p.title,
+        excerpt: p.excerpt,
+        date: p.publishedAt,
+        readTime: p.readTime,
+        tags: p.tags || [],
+        content: p.content,
+      }));
+    }
+  } catch {
+    // fall back
+  }
+  return hardcodedPosts;
+}
+
 export async function generateStaticParams() {
-  return blogPosts.map((post) => ({ slug: post.slug }));
+  try {
+    const slugs = await getAllBlogSlugs();
+    if (slugs.length > 0) {
+      return slugs.map((slug) => ({ slug }));
+    }
+  } catch {
+    // fall back
+  }
+  return hardcodedPosts.map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPost(slug);
   if (!post) return {};
 
   return {
@@ -127,12 +178,13 @@ function extractHeadings(content: string) {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPost(slug);
 
   if (!post) notFound();
 
   const headings = extractHeadings(post.content);
-  const otherPosts = blogPosts.filter((p) => p.slug !== slug).slice(0, 2);
+  const allPosts = await getAllPosts();
+  const otherPosts = allPosts.filter((p) => p.slug !== slug).slice(0, 2);
 
   const articleSchema = {
     "@context": "https://schema.org",

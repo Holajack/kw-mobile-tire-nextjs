@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Clock, ArrowRight, Tag } from "lucide-react";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/animated-section";
-import { blogPosts } from "@/data/blog-posts";
+import { blogPosts as hardcodedPosts } from "@/data/blog-posts";
+import { getPublishedBlogPosts, type SanityBlogPost } from "@/sanity/queries";
 
 export const metadata: Metadata = {
   title: "Articles",
@@ -11,7 +12,27 @@ export const metadata: Metadata = {
   alternates: { canonical: "/blog/" },
 };
 
-export default function BlogPage() {
+export const revalidate = 60;
+
+export default async function BlogPage() {
+  let sanityPosts: SanityBlogPost[] = [];
+  try {
+    sanityPosts = await getPublishedBlogPosts();
+  } catch {
+    // Sanity fetch failed — fall back to hardcoded
+  }
+
+  const posts = sanityPosts.length > 0
+    ? sanityPosts.map((p) => ({
+        slug: p.slug,
+        title: p.title,
+        excerpt: p.excerpt,
+        date: p.publishedAt,
+        readTime: p.readTime,
+        tags: p.tags || [],
+        content: p.content,
+      }))
+    : hardcodedPosts;
   return (
     <>
       {/* Header */}
@@ -33,7 +54,7 @@ export default function BlogPage() {
       <section className="py-16 lg:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.1}>
-            {blogPosts.map((post) => (
+            {posts.map((post) => (
               <StaggerItem key={post.slug}>
                 <Link
                   href={`/blog/${post.slug}`}
