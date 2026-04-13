@@ -222,51 +222,55 @@ export default function Home() {
               </motion.div>
             </div>
 
-            {/* Right — Emergency Services */}
+            {/* Right — service cards + stats + emergency button */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="bg-slate-900 dark:bg-slate-800/50 rounded-2xl p-8 sm:p-10 border border-slate-800 dark:border-slate-700"
+              className="relative"
             >
-              <h2 className="font-heading text-3xl sm:text-4xl font-bold text-white leading-tight">
-                Emergency
-                <br />
-                <span className="text-primary-light">Services</span>
-              </h2>
-              <p className="mt-3 text-slate-400 text-sm">
-                On-site tire repair &amp; replacement across Volusia, Flagler, and Brevard Counties.
-              </p>
+              {/* Emergency Services button */}
+              <a
+                href="tel:3865667339"
+                className="mb-4 w-full inline-flex items-center justify-center gap-3 bg-red-600 hover:bg-red-700 text-white py-4 rounded-2xl font-bold text-lg transition-all hover:shadow-xl hover:shadow-red-600/30 hover:-translate-y-0.5 border border-red-500"
+              >
+                <Shield className="w-5 h-5" />
+                Emergency Service — Call Now
+              </a>
 
-              <div className="mt-6 space-y-3">
+              {/* Service grid */}
+              <div className="grid grid-cols-2 gap-3">
+                {services.map((service) => {
+                  const Icon = iconMap[service.icon] || Truck;
+                  return (
+                    <Link
+                      key={service.slug}
+                      href={`/services/${service.slug}`}
+                      className="group bg-white dark:bg-slate-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 hover:border-primary/40 hover:shadow-lg transition-all duration-300"
+                    >
+                      <div className="w-10 h-10 rounded-xl bg-primary/10 dark:bg-primary/20 flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                        <Icon className="w-5 h-5 text-primary group-hover:text-white transition-colors duration-300" />
+                      </div>
+                      <p className="font-heading font-bold text-sm text-slate-900 dark:text-white">{service.shortTitle}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">{service.description.split(".")[0]}.</p>
+                    </Link>
+                  );
+                })}
+              </div>
+
+              {/* Stats strip */}
+              <div className="mt-3 grid grid-cols-3 gap-3">
                 {[
-                  { icon: Truck, label: "Commercial Vehicles", desc: "Semi-trucks, box trucks, fleet vehicles" },
-                  { icon: Caravan, label: "RVs & Travel Trailers", desc: "Motorhomes, fifth wheels, campers" },
-                  { icon: Container, label: "Trailers", desc: "Utility, boat, and equipment trailers" },
-                  { icon: HardHat, label: "Heavy Equipment / Machinery", desc: "Forklifts, skid steers, backhoes, tractors" },
-                ].map((item) => (
-                  <div
-                    key={item.label}
-                    className="flex items-start gap-4 bg-white/5 rounded-xl p-4 border border-white/10"
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
-                      <item.icon className="w-5 h-5 text-primary-light" />
-                    </div>
-                    <div>
-                      <p className="font-heading font-bold text-white text-sm">{item.label}</p>
-                      <p className="text-xs text-slate-400 mt-0.5">{item.desc}</p>
-                    </div>
+                  { value: "3", label: "Counties Served" },
+                  { value: "18+", label: "Cities Covered" },
+                  { value: "<90m", label: "Avg. Response" },
+                ].map((stat) => (
+                  <div key={stat.label} className="text-center py-4 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800">
+                    <p className="font-heading text-xl font-bold text-primary">{stat.value}</p>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">{stat.label}</p>
                   </div>
                 ))}
               </div>
-
-              <a
-                href="tel:3865667339"
-                className="mt-6 w-full inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-light text-white py-3.5 rounded-xl font-semibold transition-all hover:shadow-lg hover:shadow-primary/30"
-              >
-                <Phone className="w-4 h-4" />
-                Call Now — (386) 566-7339
-              </a>
             </motion.div>
           </div>
         </div>
